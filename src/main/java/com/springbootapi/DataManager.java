@@ -13,7 +13,7 @@ import java.util.Set;
 public class DataManager {
 
     private Client[] registeredClients = getClients();
-    final String databaseURL = "jdbc:sqlite:/springbootapi/database.db";
+    final String databaseURL = "jdbc:sqlite:/database.db";
 
     public void addMessage(Client client, String message){
         String sql = "INSERT INTO Messages(Messenger, Content, Reciever) VALUES('" + client.getUser() + "', '" + message + "', '" + client.getReciever() + "')";
