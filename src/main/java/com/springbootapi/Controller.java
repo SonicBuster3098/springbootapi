@@ -17,13 +17,14 @@ import org.springframework.http.HttpStatus;
 @CrossOrigin(origins="http://127.0.0.1:5000")
 @RequestMapping("/api")
 public class Controller {
+
     
     final DataManager dm = new DataManager();
 
-    @GetMapping(value = "/testing/{id}")
+    @GetMapping(value = "/testing")
     @ResponseStatus(HttpStatus.OK)
-    public String testing(@PathVariable String id){
-        return id;
+    public String testing(){
+        return "Render deployed correcctly.";
     }
 
     @PostMapping(value = "/login/signin", consumes = "application/json; UTF-8")
