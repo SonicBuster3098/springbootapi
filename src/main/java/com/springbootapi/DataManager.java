@@ -13,7 +13,9 @@ import java.util.Set;
 public class DataManager {
 
     private Client[] registeredClients = getClients();
-    final String databaseURL = "jdbc:sqlite:/database.db";
+    final String databaseURL = "jdbc:postgresql://itz_inevitable:ob0xkFdZSDSGxRoOZXdRYJlhQj09BPyS@dpg-cto926dumphs73cd0o70-a/database_rn25";
+    final String username = "itz_inevitable";
+    final String password = "ob0xkFdZSDSGxRoOZXdRYJlhQj09BPyS";
 
     public void addMessage(Client client, String message){
         String sql = "INSERT INTO Messages(Messenger, Content, Reciever) VALUES('" + client.getUser() + "', '" + message + "', '" + client.getReciever() + "')";
@@ -45,7 +47,7 @@ public class DataManager {
     }
 
     public int getTableLength(String table){
-        try(Connection conn = DriverManager.getConnection(databaseURL)){
+        try(Connection conn = DriverManager.getConnection(databaseURL, username, password)){
             Statement stmnt = conn.createStatement();
             ResultSet rs = stmnt.executeQuery("SELECT COUNT(*) FROM Users");
             return rs.getInt(1);
@@ -60,7 +62,7 @@ public class DataManager {
         String sql = "SELECT * FROM Messages WHERE Reciever='" + username + "' ORDER BY Messenger DESC";
         Set<Message> messages = new HashSet<>();
 
-        try(Connection conn = DriverManager.getConnection(databaseURL)){
+        try(Connection conn = DriverManager.getConnection(databaseURL, username, password)){
             Statement stmnt = conn.createStatement();
             ResultSet rs = stmnt.executeQuery(sql);
             while(rs.next()){
@@ -85,7 +87,7 @@ public class DataManager {
 
         Client[] clients = new Client[getTableLength("")];
 
-        try(Connection conn = DriverManager.getConnection(databaseURL)){
+        try(Connection conn = DriverManager.getConnection(databaseURL, username, password)){
             Statement stmnt = conn.createStatement();
             ResultSet rs = stmnt.executeQuery(sql);
             int i = 0;
@@ -111,7 +113,7 @@ public class DataManager {
 
 
     public void runSQL(String sql){
-        try(Connection conn = DriverManager.getConnection(databaseURL)){
+        try(Connection conn = DriverManager.getConnection(databaseURL, username, password)){
             Statement stmnt = conn.createStatement();
             stmnt.execute(sql);
             conn.close();
