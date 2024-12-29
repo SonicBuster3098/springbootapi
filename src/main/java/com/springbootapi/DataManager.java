@@ -12,8 +12,9 @@ import java.util.Set;
 
 public class DataManager {
 
-    private Client[] registeredClients = getClients();
-    final String databaseURL = "jdbc:postgresql://itz_inevitable:ob0xkFdZSDSGxRoOZXdRYJlhQj09BPyS@dpg-cto926dumphs73cd0o70-a/database_rn25";
+    // private Client[] registeredClients = getClients();
+    private Client[] registeredClients = null;
+    final String databaseURL = "jdbc:postgresql://ob0xkFdZSDSGxRoOZXdRYJlhQj09BPyS@dpg-cto926dumphs73cd0o70-a.oregon-postgres.render.com/database_rn25";
     final String username = "itz_inevitable";
     final String password = "ob0xkFdZSDSGxRoOZXdRYJlhQj09BPyS";
 
@@ -116,6 +117,10 @@ public class DataManager {
         try(Connection conn = DriverManager.getConnection(databaseURL, username, password)){
             Statement stmnt = conn.createStatement();
             stmnt.execute(sql);
+            ResultSet rs = stmnt.executeQuery(sql);
+            while(rs.next()){
+                System.out.println(rs.getString(1));
+            }
             conn.close();
         }
         catch(SQLException e){
