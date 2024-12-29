@@ -12,8 +12,8 @@ import java.util.Set;
 
 public class DataManager {
 
-    // private Client[] registeredClients = getClients();
-    private Client[] registeredClients = null;
+    private Client[] registeredClients = getClients();
+    // private Client[] registeredClients = null;
     final String databaseURL = "jdbc:postgresql://ob0xkFdZSDSGxRoOZXdRYJlhQj09BPyS@dpg-cto926dumphs73cd0o70-a.oregon-postgres.render.com/database_rn25";
     final String username = "itz_inevitable";
     final String password = "ob0xkFdZSDSGxRoOZXdRYJlhQj09BPyS";
@@ -51,6 +51,7 @@ public class DataManager {
         try(Connection conn = DriverManager.getConnection(databaseURL, username, password)){
             Statement stmnt = conn.createStatement();
             ResultSet rs = stmnt.executeQuery("SELECT COUNT(*) FROM Users");
+            rs.next();
             return rs.getInt(1);
         }catch(SQLException e){
             e.printStackTrace();
@@ -84,9 +85,9 @@ public class DataManager {
     }
     
     private Client[] getClients(){
-        String sql = "SELECT Username, Password FROM Users";
+        String sql = "SELECT * FROM Users";
 
-        Client[] clients = new Client[getTableLength("")];
+        Client[] clients = new Client[getTableLength("Users")];
 
         try(Connection conn = DriverManager.getConnection(databaseURL, username, password)){
             Statement stmnt = conn.createStatement();
@@ -116,10 +117,11 @@ public class DataManager {
     public void runSQL(String sql){
         try(Connection conn = DriverManager.getConnection(databaseURL, username, password)){
             Statement stmnt = conn.createStatement();
-            stmnt.execute(sql);
+            // stmnt.execute(sql);
             ResultSet rs = stmnt.executeQuery(sql);
             while(rs.next()){
                 System.out.println(rs.getString(1));
+                System.out.println(rs.getString(2));
             }
             conn.close();
         }

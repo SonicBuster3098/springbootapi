@@ -11,9 +11,12 @@ public class Application {
         // DataManager dm = new DataManager();
         // dm.runSQL("CREATE TABLE Users(Username VARCHAR(50), Password VARCHAR(255));");
         // dm.runSQL("INSERT INTO Messages(Content) VALUES ('hi')");
-        // dm.runSQL("DELETE FROM Messages WHERE Content='hi'");
+        // dm.runSQL("DELETE FROM Users WHERE Username='itz_inevitable'");
         // System.out.println(dm.getTableLength(""));
         // dm.runSQL("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE'");
+        // dm.runSQL("SELECT * FROM Users");
+        // dm.runSQL("INSERT INTO Users(Username, Password) VALUES('itz_inevitable', 'skb')");
+        // dm.runSQL("SELECT COUNT(*) FROM Users");
 
 
     }
