@@ -1,5 +1,6 @@
 package com.springbootapi;
 
+
 // import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +14,7 @@ import org.json.*;
 
 import org.springframework.http.HttpStatus;
 
-
+// @CrossOrigin(origins="http://localhost:5500")
 @RestController
 @RequestMapping("/api")
 public class Controller {
@@ -30,6 +31,7 @@ public class Controller {
     @PostMapping(value = "/login/signin", consumes = "application/json; UTF-8")
     @ResponseStatus(HttpStatus.OK)
     public String signIn(@RequestBody Client client){
+        System.out.println("recieved");
         if(dm.matchesClient(client.getUser(), client.getPass())){
             return "Welcome!";
         }
