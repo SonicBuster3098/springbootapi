@@ -17,6 +17,7 @@ public class Application {
         // dm.runSQL("SELECT * FROM Users");
         // dm.runSQL("INSERT INTO Users(Username, Password) VALUES('itz_inevitable', 'skb')");
         // dm.runSQL("SELECT COUNT(*) FROM Users");
+        // dm.runSQL("CREATE TABLE Messages(Messenger VARCHAR(50), Content VARCHAR(255), Reciever VARCHAR(50))");
 
 
     }

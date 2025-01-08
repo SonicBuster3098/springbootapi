@@ -76,7 +76,10 @@ public class Controller {
         JSONObject jsonFormat = new JSONObject();
         int count = 0;
         for(int i = 0; i < messages.length; i++){
-            jsonMessages.put(messages[i].getContent());
+            // jsonMessages.put(messages[i].getContent());
+            if(messages[i].getContent() == null){
+                return "{}";
+            }
             if(messages[i].getSender().equals(currentUsername) == false){
                 currentUsername = messages[i].getSender();
                 jsonFormat.put("Messenger", currentUsername);

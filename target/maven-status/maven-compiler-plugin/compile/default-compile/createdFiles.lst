@@ -1,5 +1,4 @@
 com/springbootapi/Message.class
-com/springbootapi/RequestFilter.class
 com/springbootapi/Application.class
 com/springbootapi/DataManager.class
 com/springbootapi/Controller.class

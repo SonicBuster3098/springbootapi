@@ -14,9 +14,9 @@ public class DataManager {
 
     private Client[] registeredClients = getClients();
     // private Client[] registeredClients = null;
-    final String databaseURL = "jdbc:postgresql://ob0xkFdZSDSGxRoOZXdRYJlhQj09BPyS@dpg-cto926dumphs73cd0o70-a.oregon-postgres.render.com/database_rn25";
-    final String username = "itz_inevitable";
-    final String password = "ob0xkFdZSDSGxRoOZXdRYJlhQj09BPyS";
+    final String databaseURL = "jdbc:postgresql://pg-24a4a67c-springbootapi.h.aivencloud.com:10193/defaultdb?sslmode=require";
+    final String username = "avnadmin";
+    final String password = "AVNS_1E5FZpr-OIOurXHQohD";
 
     public void addMessage(Client client, String message){
         String sql = "INSERT INTO Messages(Messenger, Content, Reciever) VALUES('" + client.getUser() + "', '" + message + "', '" + client.getReciever() + "')";
@@ -60,8 +60,8 @@ public class DataManager {
         return 0;
     }
 
-    public Message[] getMessages(String username){
-        String sql = "SELECT * FROM Messages WHERE Reciever='" + username + "' ORDER BY Messenger DESC";
+    public Message[] getMessages(String user){
+        String sql = "SELECT * FROM Messages WHERE Reciever='" + user + "' ORDER BY Messenger DESC";
         Set<Message> messages = new HashSet<>();
 
         try(Connection conn = DriverManager.getConnection(databaseURL, username, password)){
@@ -81,6 +81,7 @@ public class DataManager {
         for(Message m : messages){
             output[i] = m;
         }
+        // runSQL("DELETE FROM Messages WHERE Reciever='" + user + "'");
         return output;
     }
     
@@ -117,12 +118,12 @@ public class DataManager {
     public void runSQL(String sql){
         try(Connection conn = DriverManager.getConnection(databaseURL, username, password)){
             Statement stmnt = conn.createStatement();
-            // stmnt.execute(sql);
-            ResultSet rs = stmnt.executeQuery(sql);
-            while(rs.next()){
-                System.out.println(rs.getString(1));
-                System.out.println(rs.getString(2));
-            }
+            stmnt.execute(sql);
+            // ResultSet rs = stmnt.executeQuery(sql);
+            // while(rs.next()){
+            //     System.out.println(rs.getString(1));
+            //     System.out.println(rs.getString(2));
+            // }
             conn.close();
         }
         catch(SQLException e){
