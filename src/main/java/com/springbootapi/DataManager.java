@@ -14,13 +14,13 @@ public class DataManager {
 
     private Client[] registeredClients = getClients();
     // private Client[] registeredClients = null;
-    final String databaseURL = "jdbc:postgresql://pg-24a4a67c-springbootapi.h.aivencloud.com:10193/defaultdb?sslmode=require";
+    final String databaseURL = "********";
     final String username = "avnadmin";
-    final String password = "AVNS_1E5FZpr-OIOurXHQohD";
+    final String password = "*********";
 
     public void addMessage(Client client, String message){
         String sql = "INSERT INTO Messages(Messenger, Content, Reciever) VALUES('" + client.getUser() + "', '" + message + "', '" + client.getReciever() + "')";
-        runSQL(sql);
+        executeSQL(sql);
     }
 
     public boolean hasUsername(String username){
@@ -43,7 +43,7 @@ public class DataManager {
 
     public void registerNewUser(Client newClient){
         String sql = "INSERT INTO Users (Username, Password) VALUES('" + newClient.getUser() + "', '" + newClient.getPass() + "')";
-        runSQL(sql);
+        executeSQL(sql);
         registeredClients = getClients();
     }
 
@@ -115,7 +115,7 @@ public class DataManager {
     }
 
 
-    public void runSQL(String sql){
+    public void executeSQL(String sql){
         try(Connection conn = DriverManager.getConnection(databaseURL, username, password)){
             Statement stmnt = conn.createStatement();
             stmnt.execute(sql);
@@ -129,5 +129,26 @@ public class DataManager {
         catch(SQLException e){
             e.printStackTrace();
         }
+    }
+
+    public String[] querySQL(String sql){
+        String[] output = new String[3];
+
+        try(Connection conn = DriverManager.getConnection(databaseURL, username, password)){
+            Statement stmnt = conn.createStatement();
+            // stmnt.execute(sql);
+            ResultSet rs = stmnt.executeQuery(sql);
+            while(rs.next()){
+                output[0] = rs.getString(1);
+                output[1] = rs.getString(2);
+                output[2] = rs.getString(3);
+            }
+            conn.close();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return output;
     }
 }

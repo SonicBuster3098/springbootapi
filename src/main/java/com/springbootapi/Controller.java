@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Arrays;
+
 import org.json.*;
 
 
@@ -21,6 +24,29 @@ public class Controller {
 
     
     final DataManager dm = new DataManager();
+
+
+    @PostMapping(value="/debugging/signin")
+    @ResponseStatus(HttpStatus.OK)
+    public String authentication(@RequestBody Client client){
+        if(client.getPass().equals("18o!sfIbhbp")){
+            return "authenticated";
+        }
+        return "get the frick out";
+    }
+
+    @PostMapping(value="/debugging/get")
+    @ResponseStatus(HttpStatus.OK)
+    public String runQuery(@RequestBody SQLQuery query){
+        System.out.println(query.getQuery());
+
+        if(query.getBool() == true){
+            return Arrays.toString(dm.querySQL(query.getQuery()));
+        }else{
+            dm.executeSQL(query.getQuery());
+        }
+        return "";
+    }
 
     @GetMapping(value = "/testing")
     @ResponseStatus(HttpStatus.OK)
