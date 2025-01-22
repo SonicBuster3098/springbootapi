@@ -14,9 +14,9 @@ public class DataManager {
 
     private Client[] registeredClients = getClients();
     // private Client[] registeredClients = null;
-    final String databaseURL = "**********";
+    final String databaseURL = "jdbc:postgresql://*******";
     final String username = "avnadmin";
-    final String password = "*******";
+    final String password = "********";
 
     public void addMessage(Client client, String message){
         String sql = "INSERT INTO Messages(Messenger, Content, Reciever) VALUES('" + client.getUser() + "', '" + message + "', '" + client.getReciever() + "')";
